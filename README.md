@@ -5,6 +5,14 @@ deployment using Docker Compose. This repository simplifies the process of
 setting up a robust Slurm environment for development, testing, or lightweight
 usage.
 
+> [!NOTE]  
+> This forked repo uses [giovtorres/slurm-docker-cluster](https://github.com/giovtorres/slurm-docker-cluster) as 
+> a starting point. However, it diverges in several ways. Specifically, 
+> - The main `Dockerfile` has been completely rewritten such that it uses Rocky Linux 9 and the Slurm installation  
+> presented in the [Niflheim documentation](https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_installation/#slurm-installation-and-upgrading). 
+> - A modification in the repo structure, such that common files are grouped together
+> - A `job_submit.lua` was added
+
 ## 🏁 Getting Started
 
 To get up and running with Slurm in Docker, make sure you have the following tools installed:
@@ -15,7 +23,7 @@ To get up and running with Slurm in Docker, make sure you have the following too
 Clone the repository:
 
 ```bash
-git clone https://github.com/giovtorres/slurm-docker-cluster.git
+git clone https://github.com/b-reyes/slurm-docker-cluster.git
 cd slurm-docker-cluster
 ```
 
@@ -41,37 +49,21 @@ This setup consists of the following containers:
 The version of the Slurm project and the Docker build process can be simplified
 by using a `.env` file, which will be automatically picked up by Docker Compose.
 
-Update the `SLURM_TAG` and `IMAGE_TAG` found in the `.env` file and build
+Update the `SLURM_TAG` found in the `.env` file and build
 the image:
 
 ```bash
 docker compose build
 ```
 
-Alternatively, you can build the Slurm Docker image locally by specifying the
-[SLURM_TAG](https://github.com/SchedMD/slurm/tags) as a build argument and
-tagging the container with a version ***(IMAGE_TAG)***:
-
-```bash
-docker build --build-arg SLURM_TAG="slurm-21-08-6-1" -t slurm-docker-cluster:21.08.6 .
-```
-
 ## 🚀 Starting the Cluster
 
-Once the image is built, deploy the cluster with the default version of slurm
+Once the image is built, deploy the cluster with the default version of Slurm
 using Docker Compose:
 
 ```bash
 docker compose up -d
 ```
-
-To specify a specific version and override what is configured in `.env`, specify
-the `IMAGE_TAG`:
-
-```bash
-IMAGE_TAG=21.08.6 docker compose up -d
-```
-
 This will start up all containers in detached mode. You can monitor their status using:
 
 ```bash
@@ -162,14 +154,6 @@ docker compose restart
 ```
 
 This makes it easy to add/remove nodes or test new configuration settings dynamically.
-
-## 🤝 Contributing
-
-Contributions are welcomed from the community! If you want to add features, fix bugs, or improve documentation:
-
-1. Fork this repo.
-2. Create a new branch: `git checkout -b feature/your-feature`.
-3. Submit a pull request.
 
 ## 📄 License
 
