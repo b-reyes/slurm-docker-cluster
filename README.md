@@ -8,8 +8,7 @@ usage.
 > [!NOTE]  
 > This forked repo uses [giovtorres/slurm-docker-cluster](https://github.com/giovtorres/slurm-docker-cluster) as 
 > a starting point. However, it diverges in several ways. Specifically, 
-> - The main `Dockerfile` has been completely rewritten such that it uses Rocky Linux 9 and the Slurm installation  
-> presented in the [Niflheim documentation](https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_installation/#slurm-installation-and-upgrading). 
+> - The main `Dockerfile` has been completely rewritten such that it uses Rocky Linux 9 and the Slurm installation presented in the [Niflheim documentation](https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_installation/#slurm-installation-and-upgrading). 
 > - A modification in the repo structure, such that common files are grouped together
 > - A `job_submit.lua` was added
 
@@ -146,7 +145,8 @@ docker compose down -v
 
 ## ⚙️ Advanced Configuration
 
-You can modify Slurm configurations (`slurm.conf`, `slurmdbd.conf`) on the fly without rebuilding the containers. Just run:
+You can modify Slurm configurations (`slurm.conf`, `slurmdbd.conf`, `cgroup.conf`, `job_submit.lua`) on the fly without rebuilding the containers. Just run the 
+following command with whatever Slurm files you want to update:
 
 ```bash
 ./update_slurmfiles.sh slurm.conf slurmdbd.conf
