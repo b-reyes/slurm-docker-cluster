@@ -10,13 +10,15 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - var_lib_mysql:/var/lib/mysql
+      - etc_slurm:/etc/slurm         # this is done so that update_slurmfiles.sh can still be used, even if slurmdbd and slrumctld go down
     networks:
       - slurm-network
 
   slurmdbd:
     image: slurm-mini-cluster:${SLURM_TAG}
     build:
-      context: ./docker_files
+      context: ./
+      dockerfile: ./docker_files/Dockerfile
       args:
         SLURM_TAG: ${SLURM_TAG}
     command: ["slurmdbd"]

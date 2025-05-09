@@ -121,10 +121,10 @@ RUN set -x \
     && chown -R slurm:slurm /var/*/slurm* 
 #    && /sbin/create-munge-key
 
-COPY ../slurm_files/slurm.conf /etc/slurm/slurm.conf
-COPY ../slurm_files/slurmdbd.conf /etc/slurm/slurmdbd.conf
-COPY ../slurm_files/cgroup.conf /etc/slurm/cgroup.conf
-COPY ../slurm_files/job_submit.lua /etc/slurm/job_submit.lua
+COPY ./slurm_files/slurm.conf /etc/slurm/slurm.conf
+COPY ./slurm_files/slurmdbd.conf /etc/slurm/slurmdbd.conf
+COPY ./slurm_files/cgroup.conf /etc/slurm/cgroup.conf
+COPY ./slurm_files/job_submit.lua /etc/slurm/job_submit.lua
 
 RUN set -x \
     && chown slurm:slurm /etc/slurm/slurmdbd.conf \
@@ -135,7 +135,7 @@ RUN set -x \
     && chmod 600 /etc/slurm/job_submit.lua
 
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY ./docker_files/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 CMD ["slurmdbd"]
